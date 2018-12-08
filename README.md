@@ -12,6 +12,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
+### `npm start-yue`
+
+Renders the App to a native gui.
+
+### `npm start-pdf`
+
+Renders the App to an `example.pdf` file (you will find it in `src`).
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
