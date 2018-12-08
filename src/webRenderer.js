@@ -78,6 +78,8 @@ const hostConfig = {
             });
           }
         }
+      } else if (propName === 'onClick') {
+        domElement.addEventListener('click', propValue);
       } else if (propName === 'style') {
         const styleString = convertCamelCasetoInlineStyle(propValue);
         domElement.setAttribute('style', styleString);
@@ -105,11 +107,42 @@ const hostConfig = {
   prepareUpdate(domElement, oldProps, newProps) {
     return true;
   },
-  commitUpdate(domElement, updatePayload, type, oldProps, newProps) { },
-  commitTextUpdate(textInstance, oldText, newText) { },
-  removeChild(parentInstance, child) { }
+  commitUpdate(domElement, updatePayload, type, oldProps, newProps) {
+    Object.keys(newProps).forEach(propName => {
+      const propValue = newProps[propName];
+      if (propName === 'children') {
+        if (type !== 'text') {
+          if (typeof propValue === 'string' || typeof propValue === 'number') {
+            throw new Error('Text strings must be rendered within a <Text> component.');
+          }
+
+          if (propValue instanceof Array) {
+            propValue.forEach(item => {
+              if (typeof item === 'string') {
+                throw new Error('Text strings must be rendered within a <Text> component.');
+              }
+            });
+          }
+        } 
+      } else if (propName === 'onClick') {
+        // Noop
+      } else if (propName === 'style') {
+        const styleString = convertCamelCasetoInlineStyle(propValue);
+        domElement.setAttribute('style', styleString);
+      } else {
+        const propValue = newProps[propName];
+        domElement.setAttribute(propName, propValue);
+      }
+    });
+  },
+  commitTextUpdate(textInstance, oldText, newText) {
+    textInstance.textContent = newText;
+  },
+  removeChild(parentInstance, child) {
+    parentInstance.removeChild(child);
+  }
 };
-const ReactReconcilerInst = ReactReconciler(traceWrap(hostConfig));
+const ReactReconcilerInst = ReactReconciler(hostConfig);
 export default {
   render: (reactElement, domElement, callback) => {
     // Create a root Container if it doesnt exist
