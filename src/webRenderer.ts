@@ -1,17 +1,5 @@
 import ReactReconciler from 'react-reconciler';
 
-function traceWrap(hostConfig) {
-  let traceWrappedHostConfig = {};
-  Object.keys(hostConfig).map(key => {
-    const func = hostConfig[key];
-    traceWrappedHostConfig[key] = (...args) => {
-      console.trace(key);
-      return func(...args);
-    };
-  });
-  return traceWrappedHostConfig;
-}
-
 function camel2Dash(str) {
   if (str === '') {
     return '';
@@ -144,7 +132,7 @@ const hostConfig = {
 };
 const ReactReconcilerInst = ReactReconciler(hostConfig);
 export default {
-  render: (reactElement, domElement, callback) => {
+  render: (reactElement, domElement, callback = () => {}) => {
     // Create a root Container if it doesnt exist
     if (!domElement._rootContainer) {
       domElement._rootContainer = ReactReconcilerInst.createContainer(domElement, false);

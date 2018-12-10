@@ -4,16 +4,19 @@
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^1.0.0",
+    "@types/jest": "23.3.10",
+    "@types/node": "10.12.12",
+    "@types/react": "16.7.13",
     "gui": "^0.5.0",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3",
     "react-reconciler": "^0.17.2",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "typescript": "3.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-yue": "./node_modules/.bin/babel-node ./src/yue-index.js",
-    "start-pdf": "./node_modules/.bin/babel-node ./src/pdf-index.js",
+    "start-yue": "./node_modules/.bin/babel-node --extensions .js,.jsx,.ts,.tsx ./src/yue-index.tsx",
+    "start-pdf": "./node_modules/.bin/babel-node --extensions .js,.jsx,.ts,.tsx ./src/pdf-index.tsx",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -28,10 +31,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
     "@babel/node": "^7.2.0",
     "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "@babel/preset-react": "^7.0.0"
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0"
   }
 }

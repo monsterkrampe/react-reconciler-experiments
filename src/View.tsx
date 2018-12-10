@@ -3,7 +3,12 @@ import { View as PdfView } from '@react-pdf/renderer';
 
 import PdfContext from './PdfContext';
 
-const View = (props) => {
+interface Props {
+  style?: {},
+  children?: React.ReactNode;
+}
+
+const View = (props: Props) => {
   const style = {
     display: 'flex',
     flexDirection: 'column',

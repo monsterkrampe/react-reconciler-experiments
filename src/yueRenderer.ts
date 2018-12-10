@@ -1,47 +1,6 @@
 import ReactReconciler from 'react-reconciler';
 import gui from 'gui';
 
-function traceWrap(hostConfig) {
-  let traceWrappedHostConfig = {};
-  Object.keys(hostConfig).map(key => {
-    const func = hostConfig[key];
-    traceWrappedHostConfig[key] = (...args) => {
-      console.trace(key);
-      return func(...args);
-    };
-  });
-  return traceWrappedHostConfig;
-}
-
-function camel2Dash(str) {
-  if (str === '') {
-    return '';
-  }
-
-  str = str[0].toLowerCase() + str.substr(1);
-
-  return str.replace(/([A-Z])/g, function ($1) {
-    return '-' + $1.toLowerCase();
-  });
-}
-
-function convertCamelCasetoInlineStyle(style) {
-  const transformedStyles = {};
-  if (style) {
-    Object.keys(style).forEach(key => {
-      const dashedKey = camel2Dash(key);
-      transformedStyles[dashedKey] = style[key];
-      if (key === 'height') {
-        transformedStyles[dashedKey] = style[key] + 'px';
-      }
-    });
-  }
-  const styleString = Object.keys(transformedStyles).map(key => {
-    return `${key}:${transformedStyles[key]};`;
-  });
-  return styleString.join('');
-}
-
 const rootHostContext = {};
 const childHostContext = {};
 
@@ -137,7 +96,7 @@ const hostConfig = {
 };
 const ReactReconcilerInst = ReactReconciler(hostConfig);
 export default {
-  render: (reactElement, guiWindow, callback) => {
+  render: (reactElement, guiWindow, callback = () => {}) => {
     // Create a root Container if it doesnt exist
     if (!guiWindow._rootContainer) {
       guiWindow._rootContainer = ReactReconcilerInst.createContainer(guiWindow, false);

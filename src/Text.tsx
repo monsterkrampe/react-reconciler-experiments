@@ -3,7 +3,12 @@ import { Text as PdfText } from '@react-pdf/renderer';
 
 import PdfContext from './PdfContext';
 
-const Text = props => (
+interface Props {
+  onClick?: () => void;
+  children?: React.ReactNode;
+}
+
+const Text = (props: Props) => (
   <PdfContext.Consumer>
     {(isPdf) => {
       const Text = isPdf ? PdfText : 'text';

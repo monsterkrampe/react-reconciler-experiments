@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import View from './View';
 import Text from './Text';
 
-class App extends Component {
-  constructor(props) {
+interface Props {}
+
+interface State {
+  counter: number;
+}
+
+class App extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
