@@ -6,7 +6,7 @@
     "@react-pdf/renderer": "^1.0.0",
     "@types/jest": "23.3.10",
     "@types/node": "10.12.12",
-    "@types/react": "16.7.13",
+    "@types/react-dom": "^16.0.11",
     "gui": "^0.5.0",
     "react": "^16.6.3",
     "react-reconciler": "^0.17.2",
