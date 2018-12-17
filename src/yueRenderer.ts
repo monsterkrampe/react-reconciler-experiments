@@ -78,7 +78,8 @@ const hostConfig = {
           }
         }
       } else if (propName === 'onClick') {
-        // Noop
+        yueElement.onMouseDown.disconnectAll();
+        yueElement.onMouseDown.connect(propValue);
       } else if (propName === 'style') {
         yueElement.setStyle(propValue);
       } else {

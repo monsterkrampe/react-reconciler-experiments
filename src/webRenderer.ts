@@ -97,6 +97,7 @@ const hostConfig = {
   },
   commitUpdate(domElement, updatePayload, type, oldProps, newProps) {
     Object.keys(newProps).forEach(propName => {
+      const oldValue = oldProps[propName];
       const propValue = newProps[propName];
       if (propName === 'children') {
         if (type !== 'text') {
@@ -113,7 +114,8 @@ const hostConfig = {
           }
         } 
       } else if (propName === 'onClick') {
-        // Noop
+        domElement.removeEventListener('click', oldValue);
+        domElement.addEventListener('click', propValue);
       } else if (propName === 'style') {
         const styleString = convertCamelCasetoInlineStyle(propValue);
         domElement.setAttribute('style', styleString);
