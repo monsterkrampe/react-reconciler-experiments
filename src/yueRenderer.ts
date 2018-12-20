@@ -92,7 +92,7 @@ const hostConfig = {
     textInstance.setText(newText);
   },
   removeChild(parentInstance, child) {
-    parentInstance.removeChild(child);
+    parentInstance.removeChildView(child);
   }
 };
 const ReactReconcilerInst = ReactReconciler(hostConfig);
